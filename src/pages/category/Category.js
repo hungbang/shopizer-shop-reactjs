@@ -135,7 +135,7 @@ const Category = ({ setCategoryID, isLoading, strings, location, defaultStore, c
         getManufacturers(categoryid)
     }
     const getManufacturers = async (categoryid) => {
-        let action = constant.ACTION.CATEGORY + categoryid + '/' + constant.ACTION.MANUFACTURERS + '?store=' + defaultStore + '&lang=' + currentLanguageCode
+        let action = constant.ACTION.CATEGORY + categoryid + '/' + constant.ACTION.MANUFACTURER + '?store=' + defaultStore + '&lang=' + currentLanguageCode
         try {
             let response = await WebService.get(action);
             //console.log(JSON.stringify(response));
@@ -149,7 +149,7 @@ const Category = ({ setCategoryID, isLoading, strings, location, defaultStore, c
     const getVariants = async (categoryid) => {
         let action = constant.ACTION.CATEGORY + categoryid + '/' + constant.ACTION.VARIANTS + '?store=' + defaultStore + '&lang=' + currentLanguageCode;
         try {
-            let response = await WebService.get(action);
+            let response = await WebService.callv2(action ,"get");
             // console.log(response);
             if (response) {
                 response.forEach(variant => {

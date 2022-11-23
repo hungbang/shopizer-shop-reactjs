@@ -15,6 +15,7 @@ const Constant = {
         LOGIN: 'login/',
         CUSTOMERS: 'customers/',
         MANUFACTURERS: 'manufacturers/',
+        MANUFACTURER: 'manufacturer/',
         VARIANTS: 'variants/',
         CONFIG: 'config/',
         COUNTRY: 'country/',

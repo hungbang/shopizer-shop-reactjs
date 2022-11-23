@@ -1,28 +1,53 @@
 import axios from 'axios';
-import { getLocalData } from './helper'
+import {getLocalData} from './helper'
 
 const BASE_URL = window._env_.APP_BASE_URL + window._env_.APP_API_VERSION;
 axios.defaults.baseURL = BASE_URL
 
 export default class WebService {
 
+    static async callv2(action, method) {
+        const BASE_URL = window._env_.APP_BASE_URL + window._env_.APP_API_VERSION_2;
+        if (method === "get") {
+            let response = await axios.get(BASE_URL+action)
+            return response.data
+        } else if (method === "delete") {
+            let response = await axios.delete(BASE_URL+action)
+            return response.data
+        }
+    }
+
+    static async callv2WithParams(action, params, method) {
+        const BASE_URL = window._env_.APP_BASE_URL + window._env_.APP_API_VERSION_2;
+        if (method === "post") {
+            return this.post(BASE_URL + action)
+        } else if (method === "put") {
+           return this.put(BASE_URL + action, params)
+        } else if (method === "patch") {
+           return this.patch(BASE_URL + action, params)
+        }
+    }
 
     static async post(action, params) {
         let response = await axios.post(action, params)
         return response.data
     }
+
     static async put(action, params) {
         let response = await axios.put(action, params)
         return response.data
     }
+
     static async get(action) {
         let response = await axios.get(action)
         return response.data
     }
+
     static async delete(action) {
         let response = await axios.delete(action)
         return response.data
     }
+
     static async patch(action, params) {
         let response = await axios.patch(action, params)
         return response.data
@@ -53,14 +78,13 @@ axios.interceptors.response.use((response) => {
     // // Any status codes that falls outside the range of 2xx cause this function to trigger
     // // Do something with response error
 
-    const { response } = error;
+    const {response} = error;
     // const originalRequest = config;
 
     if (response.status === 401 || response.status === 404) {
 
         return Promise.reject(error);
-    }
-    else {
+    } else {
         return Promise.reject(error);
     }
 });

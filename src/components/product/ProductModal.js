@@ -131,7 +131,10 @@ function ProductModal(props, strings) {
   }
   const getPrice = async (tempSelectedOptions) => {
     setLoader(true)
-    let action = constant.ACTION.PRODUCT + product.id + '/' + constant.ACTION.PRICE;
+    console.log(product)
+    ///private/product/{sku}/price/{priceId}
+    let action = '/private' + '/' + constant.ACTION.PRODUCT + product.sku + '/' + constant.ACTION.PRICE + product.productPrice.id;
+    // let action = constant.ACTION.PRODUCT + product.id + '/' + constant.ACTION.PRICE;
     let param = { "options": tempSelectedOptions }
     try {
       let response = await WebService.post(action, param);
