@@ -98,7 +98,7 @@ function ProductModal(props, strings) {
         })
       })
       setSelectedProductColor(temp)
-      getPrice(temp)
+      // getPrice(temp)
     }
   }
   const onChangeOptions = async (value, option) => {
@@ -127,17 +127,17 @@ function ProductModal(props, strings) {
       tempSelectedOptions = temp;
       setSelectedProductColor(temp)
     }
-    getPrice(tempSelectedOptions)
+    // getPrice(tempSelectedOptions)
   }
   const getPrice = async (tempSelectedOptions) => {
     setLoader(true)
     console.log(product)
     ///private/product/{sku}/price/{priceId}
-    let action = '/private' + '/' + constant.ACTION.PRODUCT + product.sku + '/' + constant.ACTION.PRICE + product.productPrice.id;
+    let action = '/' + constant.ACTION.PRODUCT + product.sku + '/' + constant.ACTION.PRICE + product.productPrice.id;
     // let action = constant.ACTION.PRODUCT + product.id + '/' + constant.ACTION.PRICE;
     let param = { "options": tempSelectedOptions }
     try {
-      let response = await WebService.post(action, param);
+      let response = await WebService.get(action, param);
       if (response) {
         setDiscountedPrice(response.finalPrice);
         setProductPrice(response.originalPrice);
